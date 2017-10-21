@@ -18,12 +18,12 @@ file.
 
 ## Requirements
 
- * Python 3.6+
+ * Python 3.4+
  * Numpy  1.12+
  * XArray 0.9.6+
 
 Note: Older version of these libraries may work; the list above is simply
-list of versions used for development.
+the versions used for development.
 
 ## Package Contents
 
