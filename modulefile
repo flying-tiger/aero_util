@@ -15,5 +15,5 @@ if {[catch {file readlink $ModulesCurrentModulefile}]} {
 set root [file dirname $mfile]
 
 # Configure the environment
-setenv        AERO_UTIL_ROOT  $mfile_root
-prepend-path  PYTHONPATH      $mfile_root
+setenv        AERO_UTIL_ROOT  $root
+prepend-path  PYTHONPATH      $root
