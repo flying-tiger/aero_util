@@ -8,6 +8,8 @@ library of scripts that I've written over the years and I will be
 migrating them into this toolbox over time. These scripts do things
 like:
 
+ * Convert units of measure
+ * Perform coordinate system rotations
  * Convert attitude representations (alpha/beta, alphat/phi, etc.)
  * Compute stagnation conditions for calorically perfect gases
  * Compute properties for the US Standard Atmosphere
@@ -18,12 +20,14 @@ file.
 
 ## Requirements
 
- * Python 3.4+
+ * Python 3.6+
  * Numpy  1.12+
  * XArray 0.9.6+
+ * Pint   0.7.0+
 
-Note: Older version of these libraries may work; the list above is simply
-the versions used for development.
+Note: Python 3.6 is a hard required, but older version of the library
+dependencies may work; the list above is simply the versions used for
+development.
 
 ## Package Contents
 

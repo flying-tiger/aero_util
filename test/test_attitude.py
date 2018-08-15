@@ -2,6 +2,9 @@ import numpy as np
 import unittest
 from aero_util.attitude import *
 
+rad = np.radians
+deg = np.degrees
+
 def all_close(test_case, array1, array2):
     test_case.assertTrue(np.all(np.isclose(array1, array2)))
 
@@ -12,12 +15,12 @@ class AttitudeTestCase(unittest.TestCase):
 
     def setUp(self):
         # Make dimensions compatible with broadcasting
-        a = np.linspace(0, 90, 7)
-        p = np.linspace(-180., 180., 13)
+        a = rad(np.linspace(0., 90., 7))
+        p = rad(np.linspace(-180., 180., 13))
         self.alphat, self.phi = np.meshgrid(a,p)
 
     def test_uvw_from_ap(self):
-        u, v, w = uvw_from_ap(self.alphat, self.phi)
+        u, v, w = uvw_from_ap(rad(self.alphat), rad(self.phi))
 
         # Check u is as expected
         all_close(self, u[self.alphat ==   0.0],  1.0)
@@ -40,7 +43,8 @@ class AttitudeTestCase(unittest.TestCase):
         all_true(self, w[self.phi ==  120.0] <= 0.0)
 
     def test_ab_from_ap(self):
-        alpha, beta = ab_from_ap(self.alphat, self.phi)
+        alpha, beta = ab_from_ap(rad(self.alphat), rad(self.phi))
+        alpha, beta = deg(alpha), deg(beta)
 
         # Verify alpha == alphat, beta == alphat when rolled correctly
         all_close(self,  beta[self.phi == -90.0], -self.alphat[self.phi == -90.0] )
@@ -65,11 +69,11 @@ class AttitudeTestCase(unittest.TestCase):
         # roll angle at these alphas will get messed up during the round trip.
         # Therefore, we skip alphat=0 when checking roll angles
 
-        alphat, phi = ap_from_ab(*ab_from_ap(self.alphat, self.phi))
-        all_close(self, alphat, self.alphat)
-        all_close(self, phi[alphat > 0.0], self.phi[alphat > 0.0])
+        alphat, phi = ap_from_ab(*ab_from_ap(rad(self.alphat), rad(self.phi)))
+        all_close(self, alphat, rad(self.alphat))
+        all_close(self, phi[alphat > 0.0], rad(self.phi[alphat > 0.0]))
 
-        alphat, phi = ap_from_uvw(*uvw_from_ap(self.alphat, self.phi))
-        all_close(self, alphat, self.alphat)
-        all_close(self, phi[alphat > 0.0], self.phi[alphat > 0.0])
+        alphat, phi = ap_from_uvw(*uvw_from_ap(rad(self.alphat), rad(self.phi)))
+        all_close(self, alphat, rad(self.alphat))
+        all_close(self, phi[alphat > 0.0], rad(self.phi[alphat > 0.0]))
 
