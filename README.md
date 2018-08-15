@@ -25,7 +25,7 @@ file.
  * XArray 0.9.6+
  * Pint   0.7.0+
 
-Note: Python 3.6 is a hard required, but older version of the library
+Note: Python 3.6 is a hard requirement, but older version of the library
 dependencies may work; the list above is simply the versions used for
 development.
 
